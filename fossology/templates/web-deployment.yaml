@@ -80,7 +80,12 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: cache-volume
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "fossology.fullname" .) }}
+          {{- else }}
           emptyDir: {}
+          {{ end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
