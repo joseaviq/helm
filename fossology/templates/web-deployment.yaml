@@ -23,13 +23,25 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: FOSSOLOGY_DB_HOST
-              value: {{ include "fossology.fullname" . }}-db
-            - name: FOSSOLOGY_DB_NAME
-              value: {{ .Values.fossology.db_name }}
-            - name: FOSSOLOGY_DB_USER
-              value: {{ .Values.fossology.db_user }}
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_host
             - name: FOSSOLOGY_DB_PASSWORD
-              value: {{ .Values.fossology.db_passord }}
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_password
+            - name: FOSSOLOGY_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_name
+            - name: FOSSOLOGY_DB_USER
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_user
             - name: FOSSOLOGY_SCHEDULER_HOST
               value: localhost:8080
           ports:
@@ -58,13 +70,25 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: FOSSOLOGY_DB_HOST
-              value: {{ include "fossology.fullname" . }}-db
-            - name: FOSSOLOGY_DB_NAME
-              value: {{ .Values.fossology.db_name }}
-            - name: FOSSOLOGY_DB_USER
-              value: {{ .Values.fossology.db_user }}
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_host
             - name: FOSSOLOGY_DB_PASSWORD
-              value: {{ .Values.fossology.db_passord }}
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_password
+            - name: FOSSOLOGY_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_name
+            - name: FOSSOLOGY_DB_USER
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_user
           ports:
             - name: scheduler
               containerPort: 80

@@ -10,6 +10,9 @@ image:
   pullPolicy: IfNotPresent
 
 dbimage:
+# set to true if you need a temp db to be deployed with
+# the chart
+  enableTestDb: true
   repository: postgres
   tag: 9.6
   pullPolicy: IfNotPresent
@@ -21,8 +24,11 @@ fullnameOverride: ""
 fossology:
    db_name: fossology
    db_user: fossy
-   db_passord: fossy
+   db_password: fossy
    db_port:  5432
+# if you want to use an alredy deployed host 
+# enable this parameter
+#   db_host: mydb.com
 
 
 service:

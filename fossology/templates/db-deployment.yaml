@@ -1,3 +1,4 @@
+{{- if and .Values.dbimage.enableTestDb }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,15 +23,24 @@ spec:
           image: "{{ .Values.dbimage.repository }}:{{ .Values.dbimage.tag }}"
           imagePullPolicy: {{ .Values.dbimage.pullPolicy }}
           env:
-            - name: POSTGRES_DB
-              value: {{ .Values.fossology.db_name }}
-            - name: POSTGRES_USER
-              value: {{ .Values.fossology.db_user }}
             - name: POSTGRES_PASSWORD
-              value: {{ .Values.fossology.db_passord }}
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_name
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                 name: {{ template "fossology.fullname" . }}
+                 key: db_user
             - name: POSTGRES_INITDB_ARGS
               value: '-E SQL_ASCII'
           ports:
             - name: postgrsql
               containerPort: {{ .Values.fossology.db_port}}
-           
+{{- end -}}

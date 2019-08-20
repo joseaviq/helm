@@ -1,3 +1,4 @@
+{{- if and .Values.dbimage.enableTestDb }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -15,3 +16,4 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "fossology.fullname" . }}-db
     app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
