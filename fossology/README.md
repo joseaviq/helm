@@ -40,7 +40,6 @@ The following table lists the configurable parameters of the Fossology chart and
 | `image.tag`                      | image tag                                                           | `{TAG_NAME}`                                                 |
 | `image.pullPolicy`               | Image pull policy                                                             | `IfNotPresent`                                               |
 | `image.pullSecrets`              | Specify docker-registry secret names as an array                              | `[]` (does not add image pull secrets to deployed pods)      |
-                              |
 | `replicaCount`                   | Number of Pods to run                                               | `1`                                                          |
 | `dbimage.enableTestDb`                | Deploy Postgress container(s)                                                   | `true`                                                       |
 | `fossology.externalSecret`      | External secret t o be used for db configuration including host name                                                        | `nil`                                                        |
