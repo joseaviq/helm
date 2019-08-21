@@ -1,4 +1,4 @@
-{{- if and .Values.dbimage.enableTestDb }}
+{{- if .Values.dbimage.enableTestDb }}
 apiVersion: v1
 kind: Service
 metadata:

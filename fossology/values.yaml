@@ -22,6 +22,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 fossology:
+#enable this value to point to an existing secret
+#   externalSecret: foo
    db_name: fossology
    db_user: fossy
    db_password: fossy

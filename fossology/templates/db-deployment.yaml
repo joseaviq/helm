@@ -1,4 +1,4 @@
-{{- if and .Values.dbimage.enableTestDb }}
+{{- if .Values.dbimage.enableTestDb }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,17 +26,29 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
+                 {{- if .Values.fossology.externalSecret }}
+                 name: {{ .Values.fossology.externalSecret }}
+                {{- else }}
                  name: {{ template "fossology.fullname" . }}
-                 key: db_password
+                {{- end }}
+                key: db_password
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
+                {{- if .Values.fossology.externalSecret }}
+                 name: {{ .Values.fossology.externalSecret }}
+                {{- else }}
                  name: {{ template "fossology.fullname" . }}
+                {{- end }}
                  key: db_name
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
+                {{- if .Values.fossology.externalSecret }}
+                 name: {{ .Values.fossology.externalSecret }}
+                {{- else }}
                  name: {{ template "fossology.fullname" . }}
+                {{- end }}
                  key: db_user
             - name: POSTGRES_INITDB_ARGS
               value: '-E SQL_ASCII'
