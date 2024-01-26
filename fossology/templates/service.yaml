@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: {{ include "fossology.fullname" . }}-web
 {{ include "fossology.labels" . | indent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort # {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: http

@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: fossology/fossology
-  tag: 3.5.0 
+  tag: 4.4.0 
   pullPolicy: IfNotPresent
 
 dbimage:
